@@ -212,22 +212,16 @@ class OneSignal {
         "OneSignal#initNotificationWillShowInForegroundHandlerParams");
   }
 
-  void setNotificationWillShowHandler(
-      NotificationWillShowInForegroundHandler handler) {
+  void setNotificationWillShowHandler() {
     if (Platform.isIOS) {
-      setNotificationWillShowInForegroundHandler(handler);
       return;
     }
-
-
+    
     final CallbackHandle bgHandle = PluginUtilities.getCallbackHandle(
         _callbackDispatcher)!;
-    // final CallbackHandle? notificationHandler = PluginUtilities
-    //     .getCallbackHandle(handler);
 
     _channel
         .invokeMapMethod("OneSignal#initNotificationWillShowHandlerParams", {
-     // 'notificationCallbackHandle': notificationHandler?.toRawHandle(),
       'pluginCallbackHandle': bgHandle.toRawHandle(),
     });
   }
